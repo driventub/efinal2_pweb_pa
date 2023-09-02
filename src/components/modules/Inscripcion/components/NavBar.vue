@@ -1,3 +1,5 @@
+
+<!-- no llega a verse el contenido, por alguna razon -->
 <template>
   <div class="navbar navbar-expand-lg navbar-light bg-light">
     <router-link class="navbar-brand" to="/">Inscripciones</router-link>
