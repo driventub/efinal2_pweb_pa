@@ -1,13 +1,23 @@
 <template>
-    <div class="container">
+    <div >
         <h1>TOKEN</h1>
         <div>
-            <label for="">Semilla</label>
-            <input v-bind="semilla" type="text">
-            <label for="">Tiempo de Vigencia</label>
-            <input v-bind="tiempo" type="text">
-            <label for="">Token</label>
-            <input type="text" disabled>
+
+            <div class="mb-3">
+                <label class="form-label" for="">Semilla</label>
+                <input class="form-control" v-model="semilla" type="text">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="">Tiempo de Vigencia</label>
+                <input class="form-control" v-model="tiempo" type="number">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="">Token</label>
+                <input class="form-control" v-model="token" type="text" readonly>
+            </div>
+            
+           
+           
             <button type="button" class="btn btn-primary" @click="generarToken">Generar</button>
         </div>
     </div>
@@ -22,18 +32,20 @@ import { obtenerTokenFachada } from "../helpers/authApi";
             return {
                 semilla: null,
                 tiempo: null,
+                token: null,
             }
         },
         methods: {
             async generarToken(){
                 const data = {
-                    "username" : "John Doe",
-                    "password" : "123",
-                    "semilla" : this.semilla,
-                    "tiempoExpiracion": this.tiempo
+                    username : "user",
+                    password : "12345",
+                    semilla : this.semilla,
+                    tiempoExpiracion: this.tiempo
                 }
 
-                return await obtenerTokenFachada(data)
+                const res = await obtenerTokenFachada(data)
+                this.token = res.data
             }
         },
     }
