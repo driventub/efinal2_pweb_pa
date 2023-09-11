@@ -1,19 +1,37 @@
 import axios from "axios";
 
-export const insertarEstudianteFachada = async (body) => {
-  await insertarEstudiante(body);
+export const insertarEstudianteFachada = async (body, token) => {
+  await insertarEstudiante(body, token);
 };
 
-export const buscarEstudianteFachada = async (cedula) => {
-  return await buscarEstudiante(cedula);
+export const buscarEstudianteFachada = async (cedula, token) => {
+  return await buscarEstudiante(cedula, token);
 };
-const buscarEstudiante = async (cedula) => {
+
+const obtenerToken = (token) => {
+  return {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  };
+};
+
+const buscarEstudiante = async (cedula, token) => {
   await axios
-    .post(`http://localhost:8080/API/v1.0/Inscripcion/estudiantes/${cedula}`)
+    .post(
+      `http://localhost:8080/API/v1.0/Inscripcion/estudiantes/${cedula}`,
+      obtenerToken(token)
+    )
     .then((r) => r.data);
 };
-const insertarEstudiante = async (body) => {
+const insertarEstudiante = async (body, token) => {
+  console.log(obtenerToken(token));
+
   await axios
-    .post(`http://localhost:8080/API/v1.0/Inscripcion/estudiantes`, body)
+    .post(
+      `http://localhost:8080/API/v1.0/Inscripcion/estudiantes`,
+      body,
+      obtenerToken(token)
+    )
     .then((r) => r.data);
 };

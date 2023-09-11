@@ -1,32 +1,61 @@
 <template>
-  <div class="container">
+  <div>
     <h1>Estudiante</h1>
-    <div class="form-group">
-      <label class="form-control" for="">Token</label>
-      <input type="text" />
+    <div class="mb-3">
+      <label class="form-label" for="">Token</label>
+      <div class="form-floating">
+        <textarea
+          class="form-control"
+          v-model="token"
+          placeholder="algo"
+          id="floatingTextarea2"
+          style="height: 100px"
+        ></textarea>
+      </div>
     </div>
 
-    <div class="form-group">
-      <label class="form-control" for="">Nombre</label>
-      <input type="text" />
+    <div class="mb-3">
+      <label class="form-label">Nombre</label>
+      <input class="form-control" v-model="nombre" type="text" required />
     </div>
 
-    <div class="form-group">
-      <label class="form-control" for="">Apellido</label>
-      <input type="text" />
+    <div class="mb-3">
+      <label class="form-label">Apellido</label>
+      <input class="form-control" v-model="apellido" type="text" required />
     </div>
 
-    <div class="form-group">
-      <label class="form-control" for="">Cedula</label>
-      <input type="text" />
+    <div class="mb-3">
+      <label class="form-label">Cedula</label>
+      <input class="form-control" v-model="cedula" type="text" required />
     </div>
 
-    <button class="btn btn-primary"></button>
+    <button type="button" class="btn btn-primary" @click="instertarEstudiante">Enviar</button>
   </div>
 </template>
 
 <script>
-export default {};
+import { insertarEstudianteFachada } from "../helpers/estudianteApi";
+
+export default {
+  data() {
+    return {
+      token: null,
+      nombre: null,
+      apellido: null,
+      cedula: null,
+    };
+  },
+  methods: {
+    async instertarEstudiante() {
+      const datos = {
+        nombre: this.nombre,
+        apellido: this.apellido,
+        cedula: this.cedula,
+      };
+      await insertarEstudianteFachada(datos, this.token);
+    },
+  },
+};
 </script>
 
 <style scoped>

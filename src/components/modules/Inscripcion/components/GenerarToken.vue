@@ -11,10 +11,15 @@
                 <label class="form-label" for="">Tiempo de Vigencia</label>
                 <input class="form-control" v-model="tiempo" type="number">
             </div>
+
             <div class="mb-3">
                 <label class="form-label" for="">Token</label>
-                <input class="form-control" v-model="token" type="text" readonly>
+                <div class="form-floating">
+                    <textarea class="form-control" v-model="token" placeholder="algo" id="floatingTextarea2" style="height: 100px" readonly></textarea>
+                </div>
             </div>
+
+            
             
            
            
