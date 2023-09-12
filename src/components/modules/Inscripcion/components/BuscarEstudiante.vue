@@ -1,44 +1,37 @@
 <template>
-    <div>
-        <table>
-            <thead>
-                <tr>
-                    <td>
-                        <label for="">ID</label>
-                        <label for="">Nombre</label>
-                        <label for="">Apellido</label>
-                        <label for="">Cedula</label>
-                    </td>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- usar algo del pop push, algo asi para poner nuevos datos en una lista de vue, ver la documentacion -->
-            </tbody>
-        </table>
-    </div>
+  <div>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Cedula</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr v-for="(estudiante, index) in estudiantes" :key="estudiante.id">
+              <th scope="row"> {{ estudiante.id }} </th>
+              <td>{{ estudiante.nombre }}</td>
+              <td>{{ estudiante.apellido }}</td>
+              <td>{{ estudiante.cedula }}</td>
+            </tr>
+          </tbody>
+      </table>
+  </div>
 </template>
 
 <script>
-import { buscarEstudianteFachada } from "../helpers/estudianteApi";
-    
-    export default {
-        data() {
-            return {
-                id: null,
-                nombre: null,
-                apellido: null,
-                cedula: null,
-            }
-        },    
-        methods: {
-            async buscarID(){
-                // tiene que llegar del Insertar la cedula
-                return await buscarEstudianteFachada(cedula)
-            }
-        },
-    }
+
+
+export default {
+  props: {
+    estudiantes: Array,
+  },
+
+ 
+  
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -7,7 +7,7 @@
         <div class="card">
           <div class="card-body">
             <h1 class="card-title text-center"></h1>
-            <InsertarEstudiante />
+            <InsertarEstudiante @estudianteInsertado="actualizarTabla"/>
           </div>
         </div>
       </div>
@@ -20,7 +20,7 @@
         <div class="card">
           <div class="card-body">
             <h1 class="card-title text-center"></h1>
-            <BuscarEstudiante />
+            <BuscarEstudiante :estudiantes="lista"/>
           </div>
         </div>
       </div>
@@ -36,6 +36,17 @@ export default {
   components: {
     BuscarEstudiante,
     InsertarEstudiante,
+  },
+
+  data() {
+    return {
+      lista : []
+    }
+  },
+  methods: {
+    actualizarTabla(estudiante){
+      this.lista.push(estudiante)
+    }
   },
 };
 </script>

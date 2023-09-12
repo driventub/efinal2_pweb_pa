@@ -29,12 +29,14 @@
       <input class="form-control" v-model="cedula" type="text" required />
     </div>
 
-    <button type="button" class="btn btn-primary" @click="instertarEstudiante">Enviar</button>
+    <button type="button" class="btn btn-primary" @click="insertarEstudiante">
+      Enviar
+    </button>
   </div>
 </template>
 
 <script>
-import { insertarEstudianteFachada } from "../helpers/estudianteApi";
+import { buscarEstudianteFachada, insertarEstudianteFachada } from "../helpers/estudianteApi";
 
 export default {
   data() {
@@ -46,13 +48,24 @@ export default {
     };
   },
   methods: {
-    async instertarEstudiante() {
+    async insertarEstudiante() {
       const datos = {
         nombre: this.nombre,
         apellido: this.apellido,
         cedula: this.cedula,
       };
       await insertarEstudianteFachada(datos, this.token);
+
+      const ide = await buscarEstudianteFachada(this.cedula, this.token)
+
+      console.log(ide);
+      const enviar = {
+        nombre: this.nombre,
+        apellido: this.apellido,
+        cedula: this.cedula,
+        id: ide
+      }
+      this.$emit("estudianteInsertado", enviar);
     },
   },
 };

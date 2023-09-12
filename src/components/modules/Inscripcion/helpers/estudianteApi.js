@@ -17,13 +17,14 @@ const obtenerToken = (token) => {
 };
 
 const buscarEstudiante = async (cedula, token) => {
-  await axios
-    .post(
+  return await axios
+    .get(
       `http://localhost:8080/API/v1.0/Inscripcion/estudiantes/${cedula}`,
       obtenerToken(token)
     )
     .then((r) => r.data);
 };
+//
 const insertarEstudiante = async (body, token) => {
   console.log(obtenerToken(token));
 
